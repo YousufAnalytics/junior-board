@@ -1,13 +1,13 @@
-import './App.css'
-import Registration from './features/Registration/Registration'
-
+// App.tsx
+import { BrowserRouter as Router } from "react-router-dom";
+// import AppRoutes from "./routes";
+import AppRoutes from "./router/AppRoutes";
 function App() {
-
   return (
-    <>
-      <Registration />
-    </>
-  )
+    <Router>
+      <AppRoutes />
+    </Router>
+  );
 }
 
-export default App
+export default App;
