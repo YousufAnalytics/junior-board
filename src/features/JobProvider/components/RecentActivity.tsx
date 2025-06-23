@@ -11,7 +11,6 @@ const activityData: ActivityData = {
     'Posted a new job: Software Engineer',
     'Shortlisted candidate: Priya Sharma',
      'Scheduled interview with Kunal',
-    'Rejected candidate: Amit Verma',
   ],
   lastWeek: [
     'Scheduled interview with Kunal',
@@ -39,9 +38,9 @@ const RecentActivity: React.FC = () => {
     }
 
     return (
-      <ul className="mt-4 space-y-2">
+      <ul className="mt-4 space-y-2 h-[200px] overflow-y-auto">
         {items.map((item, index) => (
-          <li key={index} className="text-sm text-gray-500 border border-gray-200 bg-sky-100 rounded p-2 ">
+          <li key={index} className="text-sm text-gray-500 border border-gray-200 bg-sky-100 rounded p-2">
             {item}
           </li>
         ))}
@@ -50,7 +49,7 @@ const RecentActivity: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl border-1 border-gray-300 p-6 w-1/2">
+    <div className="bg-white rounded-xl border-1 border-gray-300 p-6 w-1/2 h-[270px]">
       <h2 className="text-xl font-semibold mb-4 text-gray-800">Recent Activity</h2>
 
       <div className="flex space-x-4 border-b border-gray-200 mb-4">
