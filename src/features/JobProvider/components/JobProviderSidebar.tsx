@@ -1,16 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
+import { LayoutDashboard,ClipboardList } from "lucide-react";
 
 const navItems = [
-  { label: "Dashboard", path: "/dashboard" },
-  { label: "Applications", path: "/applications" },
-  { label: "AI Resume Builder", path: "/resume-builder" },
-  { label: "Candidate Insights", path: "/candidate-insights" },
-  { label: "Smart Filters", path: "/smart-filters" },
-  { label: "Saved Candidates", path: "/saved-candidates" },
-  { label: "Interview Scheduler", path: "/interview-scheduler" },
-  { label: "Collaboration Hub", path: "/collaboration" },
-  { label: "Reports & Analytics", path: "/analytics" },
-  { label: "Settings", path: "/settings" },
+  { label: "Dashboard", path: "/dashboard", icon :  <LayoutDashboard /> },
+  { label: "My Jobs", path: "/applications", icon : <ClipboardList /> },
 ];
 
 const JobProviderSidebar = () => {
@@ -28,16 +21,17 @@ const JobProviderSidebar = () => {
       {/* Nav */}
       <nav className="flex-1 px-4">
         <ul className="space-y-2">
-          {navItems.map(({ label, path }) => (
+          {navItems.map(({ label, path,icon }) => (
             <li key={path}>
               <Link
                 to={path}
-                className={`block px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
                   isActive(path)
                     ? "bg-sky-100 text-blue-500"
                     : "text-zinc-500 hover:bg-gray-200"
                 }`}
               >
+                <span className="text-lg">{icon}</span>
                 {label}
               </Link>
             </li>

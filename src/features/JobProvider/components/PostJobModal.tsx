@@ -1,9 +1,6 @@
 import React from "react";
 import Input from "../../../components/ui/Input";
 import Textarea from "../../../components/ui/Textarea";
-import Select from "../../../components/ui/Select";
-
-type JobType = "Full Time" | "Part Time";
 
 interface PostJobModalProps {
   isOpen: boolean;
@@ -16,7 +13,6 @@ export interface JobFormData {
   description: string;
   skills: string;
   qualification: string;
-  type: JobType;
   location: string;
   ctc: string;
   openings: number;
@@ -33,7 +29,6 @@ const PostJobModal: React.FC<PostJobModalProps> = ({
     description: "",
     skills: "",
     qualification: "",
-    type: "Full Time",
     location: "",
     ctc: "",
     openings: 1,
@@ -52,6 +47,7 @@ const PostJobModal: React.FC<PostJobModalProps> = ({
     }));
   };
 
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
@@ -62,7 +58,7 @@ const PostJobModal: React.FC<PostJobModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-8 relative border border-gray-200">
+      <div className="bg-white rounded-md shadow-2xl w-full max-w-3xl p-8 relative border border-gray-200">
         <h2 className="text-3xl font-bold mb-6 text-gray-800">
           Post a New Job
         </h2>
@@ -133,23 +129,6 @@ const PostJobModal: React.FC<PostJobModalProps> = ({
               placeholder="Educational Qualification"
             />
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Job Type
-            </label>
-            <Select
-              value={formData.type}
-              onChange={handleChange}
-              placeholder="Select Job Type"
-              options={[
-                { label: "Full Time", value: "full" },
-                { label: "Part Time", value: "part" },
-                { label: "Internship", value: "intern" },
-              ]}
-            />
-          </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               CTC
@@ -192,13 +171,13 @@ const PostJobModal: React.FC<PostJobModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition"
+              className="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition shadow-md"
+              className="px-5 py-2.5 bg-blue-300  text-slate-800 rounded-md hover:bg-blue-400 transition shadow-md cursor-pointer"
             >
               Post Job
             </button>
