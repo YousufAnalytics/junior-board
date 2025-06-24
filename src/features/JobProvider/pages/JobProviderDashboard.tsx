@@ -1,7 +1,7 @@
 import { Briefcase, Users, FileText, TrendingUp } from "lucide-react";
 import RecentActivity from "../components/RecentActivity";
 import ApplicationsLineChart from "../components/ApplicationsLineChart";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   CartesianGrid,
@@ -12,6 +12,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useState } from "react";
+import PostJobModal from "../components/PostJobModal";
 
 const stats = [
   {
@@ -61,59 +63,73 @@ const reminders = [
   },
 ];
 const JobProviderDashboard = () => {
-
+  const [isModalOpen, setModalOpen] = useState(false);
 
   return (
     <>
-    <div className="p-6 bg-white rounded-2xl mt-10">
-      <div className="mb-6">
-        <div className="flex justify-end mb-4">
-          <button className="flex items-center space-x-2 bg-blue-300 text-slate-800 font-medium px-4 py-2 rounded-md shadow transition duration-300 cursor-pointer hover:bg-blue-400">
-            <span>Post New Job</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Top Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {stats.map((stat, idx) => (
-          <div
-            key={idx}
-            className="bg-white rounded-xl border-1 border-gray-300 p-4 flex items-center gap-4"
-          >
-            <div className="p-2 rounded-lg">{stat.icon}</div>
-            <div>
-              <p className="text-sm text-zinc-500 font-medium">{stat.title}</p>
-              <p className="text-xl font-semibold text-zinc-500">
-                {stat.value}
-              </p>
-            </div>
+      <div className="p-6 bg-white rounded-2xl mt-10">
+        <div className="mb-6">
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="flex items-center space-x-2 bg-blue-300 text-slate-800 font-medium px-4 py-2 rounded-md shadow transition duration-300 cursor-pointer hover:bg-blue-400"
+            >
+              <span>Post New Job</span>
+            </button>
           </div>
-        ))}
-      </div>
-      <div className="flex gap-4">
-        <RecentActivity />
-        <div className="w-1/2 bg-white rounded-xl border border-gray-300 p-4">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">
-            Application Trend
-          </h2>
-          <ResponsiveContainer width="100%" height={190}>
-            <LineChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="applications"
-                stroke="#3b82f6"
-                strokeWidth={2}
-              />
-            </LineChart>
-          </ResponsiveContainer>
         </div>
+
+        {/* Top Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {stats.map((stat, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-xl border-1 border-gray-300 p-4 flex items-center gap-4"
+            >
+              <div className="p-2 rounded-lg">{stat.icon}</div>
+              <div>
+                <p className="text-sm text-zinc-500 font-medium">
+                  {stat.title}
+                </p>
+                <p className="text-xl font-semibold text-zinc-500">
+                  {stat.value}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-4">
+          <RecentActivity />
+          <div className="w-1/2 bg-white rounded-xl border border-gray-300 p-4">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">
+              Application Trend
+            </h2>
+            <ResponsiveContainer width="100%" height={190}>
+              <LineChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="applications"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        {isModalOpen && (
+          <PostJobModal
+            isOpen={isModalOpen}
+            onClose={() => setModalOpen(false)}
+            onSubmit={(data) => {
+              console.log("Job Posted:", data);
+            }}
+          />
+        )}
       </div>
-    </div>
     </>
   );
 };

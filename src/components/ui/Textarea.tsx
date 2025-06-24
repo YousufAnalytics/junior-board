@@ -1,15 +1,13 @@
 interface InputProps {
-    type: string;
     placeholder?: string;
-    change? : (event : React.ChangeEvent<HTMLInputElement>) => void;
+    change? : (event : React.ChangeEvent<HTMLTextAreaElement>) => void;
     name?: string
     value?: string | number
 }
 
-function Input({ type,placeholder,change,name, value }: InputProps) {
+function Textarea({ placeholder,change,name, value }: InputProps) {
     return (
-        <input
-            type={type}
+        <textarea
             placeholder={placeholder}
             name={name}
             value = {value}
@@ -23,4 +21,4 @@ function Input({ type,placeholder,change,name, value }: InputProps) {
     );
 }
 
-export default Input;
+export default Textarea;

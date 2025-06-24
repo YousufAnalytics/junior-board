@@ -8,10 +8,8 @@ import { Applications } from "../features/JobProvider/pages";
 
 const AppRoutes = () => {
   const location = useLocation();
-
   // Always read role fresh from localStorage
   const role = localStorage.getItem("userRole");
-  console.log("ROLE FROM LOCALSTORAGE:", role);
 
   return (
     <Routes location={location} key={location.pathname}>
