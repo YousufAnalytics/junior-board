@@ -4,7 +4,7 @@ import Home from "../features/Pages/Home";
 import JobProviderLayout from "../features/Layouts/JobProviderLayout";
 import JobSeekerLayout from "../features/Layouts/JobSeekerLayout";
 import DashboardRouter from "./DashboardRouter";
-import { Applications } from "../features/JobProvider/pages";
+import { Jobs } from "../features/JobProvider/pages";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -20,7 +20,7 @@ const AppRoutes = () => {
         element={role === "jobseeker" ? <JobSeekerLayout /> : <JobProviderLayout />}
       >
         <Route path="/dashboard" element={<DashboardRouter />} />
-        <Route path="/applications" element={<Applications />} />
+        <Route path="/applications" element={<Jobs />} />
       </Route>
     </Routes>
   );

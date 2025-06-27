@@ -51,7 +51,6 @@ const PostJobModal: React.FC<PostJobModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
-    onClose();
   };
 
   if (!isOpen) return null;
@@ -162,7 +161,7 @@ const PostJobModal: React.FC<PostJobModalProps> = ({
             <Input
               type="date"
               name="deadline"
-              value={formData.openings}
+              value={formData.deadline}
               change={handleChange}
             />
           </div>

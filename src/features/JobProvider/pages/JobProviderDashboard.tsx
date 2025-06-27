@@ -1,7 +1,8 @@
-import { Briefcase, Users, FileText, TrendingUp } from "lucide-react";
+import { Briefcase, Users, FileText, TrendingUp, Loader } from "lucide-react";
 import RecentActivity from "../components/RecentActivity";
 import ApplicationsLineChart from "../components/ApplicationsLineChart";
 import { useNavigate } from "react-router-dom";
+import { usePostJob } from "../hooks/usePostJob";
 
 import {
   CartesianGrid,
@@ -64,6 +65,26 @@ const reminders = [
 ];
 const JobProviderDashboard = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const { mutate: postJob, isPending } = usePostJob();
+
+
+  const handleJobSubmit = (formData: any) => {
+  const jobData = {
+    ...formData,
+    jobProviderId: 'fb60f6db-fcc2-4dc8-aaa8-780f58ed32ed',
+    companyId: 'd2136d78-e8af-451a-8fac-924137ab11bc',
+  };
+
+  postJob(jobData, {
+    onSuccess: () => {
+      alert('Job posted successfully!');
+      setModalOpen(false)
+    },
+    onError: (error) => {
+      alert(error.message);
+    },
+  });
+};
 
   return (
     <>
@@ -124,11 +145,10 @@ const JobProviderDashboard = () => {
           <PostJobModal
             isOpen={isModalOpen}
             onClose={() => setModalOpen(false)}
-            onSubmit={(data) => {
-              console.log("Job Posted:", data);
-            }}
+            onSubmit={handleJobSubmit}
           />
         )}
+        {isPending && <Loader className="animate-spin text-primary" size={24} />}
       </div>
     </>
   );
